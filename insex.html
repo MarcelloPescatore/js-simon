@@ -15,7 +15,7 @@
 
     <title>Boolean Game</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar px-4 py-2">
             <div class="container-fluid">
@@ -28,7 +28,7 @@
     </header>
     <!-- /header -->
     
-    <main>
+    <main class="flex-grow-1">
         <div class="container py-5 px-5 my-4">
             <div class="row">
                 <div>
@@ -90,7 +90,10 @@
             <div class="row" id="row-result" style="display: none;">
                 <h2>Risultato</h2>
                 <div class="d-flex justify-content-between my-2">
-                    <h4 id="results" class="m-0"></h4>
+                    <div class="d-flex flex-column">
+                        <h4 id="results" class="m-0"></h4>
+                        <h6 id="soluzioni" class="py-2"></h6>
+                    </div>
                     <!-- /risultato -->
                     <div class="box col-3 ">
                         <button id="refresh" class="btn btn-2 w-100">gioca ancora</button>
@@ -103,8 +106,10 @@
     </main>
     <!-- /main -->
 
-    <footer>
-
+    <footer class="mt-auto">
+        <div class="container d-flex justify-content-center">
+            <p>&copy; 2024 Booleaner Marcello. Tutti i diritti riservati.</p>
+        </div>
     </footer>
     <!-- /footer -->
 
