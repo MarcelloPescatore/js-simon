@@ -41,7 +41,7 @@ for (let i = 0; i < 5; i++) {
     randomNumbers.push(generatorNumbers)
 }
 // stampo l'array in console
-// console.log(randomNumbers);
+console.log(randomNumbers);
 
 // Facciamo apparire i numeri in html
 document.getElementById('numero0').innerText = randomNumbers[0]
@@ -55,7 +55,7 @@ document.getElementById('numero4').innerText = randomNumbers[4]
 // 2) Fai partire un timer di 30 secondi 
 
 // Variabile timer
-let timer = 30;
+let timer = 10;
 
 // set up dell'intervallo di iterazioni della funzione
 const timerOn = setInterval(timerFunction, 1000);
@@ -77,11 +77,11 @@ function timerFunction() {
         console.log('Timer scaduto');
 
         // i numeri scompaiono
-        document.getElementById('box0').style.backgroundColor = 'black'
-        document.getElementById('box1').style.backgroundColor = 'black'
-        document.getElementById('box2').style.backgroundColor = 'black'
-        document.getElementById('box3').style.backgroundColor = 'black'
-        document.getElementById('box4').style.backgroundColor = 'black'
+        document.getElementById('numero0').innerText = '?'
+        document.getElementById('numero1').innerText = '?'
+        document.getElementById('numero2').innerText = '?'
+        document.getElementById('numero3').innerText = '?'
+        document.getElementById('numero4').innerText = '?'
 
         // appaiono 5 input in cui inserire il numero
         document.getElementById('row-input').style.display = 'flex'
@@ -91,6 +91,8 @@ function timerFunction() {
         // Aggiungi un event listener per il clic sul pulsante
         const submitButton = document.getElementById('submitButton');
         submitButton.addEventListener('click', function () {
+            // nascondi gli input
+            document.getElementById('row-input').style.display = 'none'
             // Seleziona gli input
             const input0 = document.getElementById('input1').value;
             const input1 = document.getElementById('input2').value;
@@ -98,21 +100,62 @@ function timerFunction() {
             const input3 = document.getElementById('input4').value;
             const input4 = document.getElementById('input5').value;
 
+            // faccio apparire row-result
+            document.getElementById('row-result').style.display = 'flex'
+
             // Crea un array e salva i valori
             const userNumbers = [];
             for (let i = 1; i <= 5; i++) {
                 userNumbers.push(parseInt(document.getElementById(`input${i}`).value));
-            }        
+            }
             // Stampa l'array nella console
-            // console.log(userNumbers);
+            console.log(userNumbers);
 
             // confronta l'array generato random e quello con i valori dell'utente
-            const correctNumbers = userNumbers.filter(num => randomNumbers.includes(num));
+            function controlloreNumeri(userNumbers, randomNumbers) {
+                // array di numeri corretti
+                const correctNumbers = [];
+                for (let i = 0; i < userNumbers.length; i++) {
+                    if (randomNumbers.includes(userNumbers[i])) {
+                        correctNumbers.push(userNumbers[i]);
+                        // ritorna il numero corretto nel box e cambia bgcolor
+                        document.getElementById(`numero${i}`).innerText = userNumbers[i];
+                        document.getElementById(`numero${i}`).style.color = 'white'
+                        document.getElementById(`box${i}`).style.backgroundColor = 'green'
+                        document.getElementById(`box${i}`).style.border = '1px solid green'
+                    } else {
+                        // ritorna il numero sbagliato nel box e cambia bgcolor
+                        document.getElementById(`numero${i}`).innerText = userNumbers[i];
+                        document.getElementById(`numero${i}`).style.color = 'white'
+                        document.getElementById(`box${i}`).style.backgroundColor = 'red'
+                        document.getElementById(`box${i}`).style.border = '1px solid red'
+                    }
+                }
+                return correctNumbers;
+            }
+            // richiama funzione 
+            const correctNumbers = controlloreNumeri(userNumbers, randomNumbers);
             const correctCount = correctNumbers.length;
-
+            
             // stampa i risultati
-            document.getElementById('results').innerText = `Hai indovinato ${correctCount} numeri: ${correctNumbers.join(', ')}`;
-            console.log(`Hai indovinato ${correctCount} numeri su 5: ${correctNumbers.join(', ')}`);
+            if (correctCount === 0) {
+                document.getElementById('results').innerText = `Mantieni allenato il tuo cervello 😒 `;
+                document.getElementById('soluzioni').innerText = `Ecco le soluzioni: [${randomNumbers}]`;
+            } else if(correctCount >= 2) {
+                document.getElementById('results').innerText = `Congratulazioni!👏 Hai memorizzato ${correctCount} numeri su 5`;
+                document.getElementById('soluzioni').innerText = `Ecco le soluzioni: [${randomNumbers}]`;
+            } else {
+                document.getElementById('results').innerText = `Hai memorizzato ${correctCount} numero su 5`;
+                document.getElementById('soluzioni').innerText = `Ecco le soluzioni: [${randomNumbers}]`;
+            }
+
+            // button refresh page gioca ancora
+            let refresh = document.getElementById("refresh")
+
+            refresh.addEventListener('click', function () {
+
+                location.reload();
+            })
         })
     }
 }
