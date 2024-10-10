@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #2e45cc;
+}
+
+
+.container{
+    background-color: white;
+    span{
+        font-size: 32px;
+        color: black;
+    }
+
+    #timer, h2{
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    #timer{
+        color: red;
+    }
+
+    .box-random-numbers{
+        width: 80px;
+        height: 80px;
+        border: 2px solid #d9ff66;
+    }
+
+}
