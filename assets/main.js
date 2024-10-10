@@ -55,7 +55,7 @@ document.getElementById('numero4').innerText = randomNumbers[4]
 // 2) Fai partire un timer di 30 secondi 
 
 // Variabile timer
-let timer = 10;
+let timer = 30;
 
 // set up dell'intervallo di iterazioni della funzione
 const timerOn = setInterval(timerFunction, 1000);
