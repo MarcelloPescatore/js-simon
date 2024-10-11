@@ -41,7 +41,7 @@ for (let i = 0; i < 5; i++) {
     randomNumbers.push(generatorNumbers)
 }
 // stampo l'array in console
-console.log(randomNumbers);
+// console.log(randomNumbers);
 
 // Facciamo apparire i numeri in html
 document.getElementById('numero0').innerText = randomNumbers[0]
@@ -55,7 +55,7 @@ document.getElementById('numero4').innerText = randomNumbers[4]
 // 2) Fai partire un timer di 30 secondi 
 
 // Variabile timer
-let timer = 30;
+let timer = 10;
 
 // set up dell'intervallo di iterazioni della funzione
 const timerOn = setInterval(timerFunction, 1000);
@@ -94,11 +94,11 @@ function timerFunction() {
             // nascondi gli input
             document.getElementById('row-input').style.display = 'none'
             // Seleziona gli input
-            const input0 = document.getElementById('input1').value;
-            const input1 = document.getElementById('input2').value;
-            const input2 = document.getElementById('input3').value;
-            const input3 = document.getElementById('input4').value;
-            const input4 = document.getElementById('input5').value;
+            // const input0 = document.getElementById('input1').value;
+            // const input1 = document.getElementById('input2').value;
+            // const input2 = document.getElementById('input3').value;
+            // const input3 = document.getElementById('input4').value;
+            // const input4 = document.getElementById('input5').value;
 
             // faccio apparire row-result
             document.getElementById('row-result').style.display = 'flex'
@@ -106,7 +106,12 @@ function timerFunction() {
             // Crea un array e salva i valori
             const userNumbers = [];
             for (let i = 1; i <= 5; i++) {
-                userNumbers.push(parseInt(document.getElementById(`input${i}`).value));
+                let userNumber = parseInt(document.getElementById(`input${i}`).value);
+                // check valori doppi
+                if (userNumbers.includes(userNumber) !== true){
+                    // aggiungo all'array solo numeri unici
+                    userNumbers.push(userNumber); 
+                }
             }
             // Stampa l'array nella console
             console.log(userNumbers);
